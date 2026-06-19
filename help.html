@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help & Support – AI Home</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🆘</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/animations.css">
+<style>
+.help-page { padding-top: 64px; }
+.help-hero {
+  background: linear-gradient(135deg, rgba(124,111,247,0.08) 0%, rgba(96,165,250,0.05) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.help-hero h1 { font-family: var(--font-head); font-size: 2.5rem; font-weight: 800; color: var(--text); margin-bottom: 1rem; }
+.help-hero p { color: var(--text2); font-size: 1.05rem; max-width: 500px; margin: 0 auto 2rem; }
+.help-search-wrap { max-width: 480px; margin: 0 auto; position: relative; }
+.help-search-wrap input {
+  width: 100%; background: var(--card); border: 1px solid var(--border2);
+  border-radius: var(--radius); padding: 14px 20px; color: var(--text);
+  font-size: 15px; font-family: var(--font-body); outline: none;
+  transition: border-color 0.2s;
+}
+.help-search-wrap input:focus { border-color: var(--accent); }
+.help-search-wrap input::placeholder { color: var(--text3); }
+
+.help-content { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+.help-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+.help-card:hover { border-color: rgba(124,111,247,0.3); transform: translateY(-3px); }
+.help-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+.help-card h3 { font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.help-card p { font-size: 14px; color: var(--text2); }
+.help-card .card-link { font-size: 13px; color: var(--accent2); margin-top: 1rem; display: block; font-weight: 500; }
+
+/* FAQ */
+.faq-section { margin-bottom: 4rem; }
+.faq-section h2 { font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; }
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+.faq-question {
+  padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; font-weight: 600; font-size: 15px;
+  color: var(--text); transition: color 0.2s;
+  gap: 1rem;
+}
+.faq-question:hover { color: var(--accent2); }
+.faq-arrow { transition: transform 0.3s; font-size: 12px; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-answer {
+  padding: 0 20px;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s;
+  font-size: 14px; color: var(--text2); line-height: 1.7;
+}
+.faq-item.open .faq-answer { max-height: 300px; padding: 0 20px 16px; }
+
+/* CONTACT */
+.contact-section {
+  background: linear-gradient(135deg, rgba(124,111,247,0.06) 0%, rgba(52,211,153,0.04) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.contact-info h2 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+.contact-info p { color: var(--text2); font-size: 14px; margin-bottom: 1.5rem; }
+.contact-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px; color: var(--text);
+}
+.contact-item:last-child { border-bottom: none; }
+.contact-item .c-icon { font-size: 20px; }
+.contact-item a { color: var(--accent2); }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.contact-form input, .contact-form textarea, .contact-form select {
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); padding: 12px 16px;
+  color: var(--text); font-family: var(--font-body); font-size: 14px; outline: none;
+  transition: border-color 0.2s;
+}
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--text3); }
+.contact-form textarea { min-height: 120px; resize: vertical; }
+.contact-form button {
+  background: var(--accent); color: #fff; border: none;
+  padding: 13px 28px; border-radius: var(--radius-sm);
+  font-size: 15px; font-weight: 600; font-family: var(--font-head);
+  cursor: pointer; transition: all 0.2s;
+}
+.contact-form button:hover { background: var(--accent2); transform: translateY(-1px); }
+.form-success {
+  display: none;
+  text-align: center; padding: 2rem;
+  color: var(--green);
+}
+.form-success .s-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+@media (max-width: 700px) {
+  .contact-section { grid-template-columns: 1fr; gap: 2rem; }
+  .help-hero h1 { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+<canvas id="particleCanvas"></canvas>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <div class="logo-icon"><span class="logo-ai">AI</span><span class="logo-dot"></span></div>
+      <span class="logo-text">AI <strong>Home</strong></span>
+    </a>
+    <div class="nav-center">
+      <a href="../index.html#tools" class="nav-link">Tools</a>
+      <a href="chatbot.html" class="nav-link">AI Chat</a>
+      <a href="help.html" class="nav-link" style="color:var(--accent2)">Help</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <div class="nav-right">
+      <a href="chatbot.html" class="btn-nav">Try AI Chat ✦</a>
+    </div>
+  </div>
+</nav>
+
+<div class="help-page">
+  <div class="help-hero">
+    <h1 class="animate-fade-up delay-1">Help & Support 🆘</h1>
+    <p class="animate-fade-up delay-2">Find answers, get in touch, or explore our guides below.</p>
+    <div class="help-search-wrap animate-fade-up delay-3">
+      <input type="text" placeholder="Search help articles… (e.g. how to use chatbots)" />
+    </div>
+  </div>
+
+  <div class="help-content">
+
+    <!-- QUICK LINKS -->
+    <div class="help-grid animate-on-scroll">
+      <div class="help-card">
+        <div class="help-card-icon">🚀</div>
+        <h3>Getting Started</h3>
+        <p>New to AI? Learn how to use AI Home to find and launch the perfect tools for your needs.</p>
+        <span class="card-link">Read guide →</span>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon">🔍</div>
+        <h3>Finding the Right Tool</h3>
+        <p>Use filters, search, and our AI chatbot to discover which tools match your use case.</p>
+        <span class="card-link">Learn more →</span>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon">💬</div>
+        <h3>AI Chatbot Help</h3>
+        <p>Questions about our built-in AI chatbot? Learn what it can and can't do for you.</p>
+        <span class="card-link">Chatbot guide →</span>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon">🆓</div>
+        <h3>Free vs Paid Tools</h3>
+        <p>Understand the difference between free, freemium, and paid AI tools before you sign up.</p>
+        <span class="card-link">Compare tiers →</span>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon">📚</div>
+        <h3>AI for Students</h3>
+        <p>A curated guide of the best free AI tools for studying, writing, coding, and research.</p>
+        <span class="card-link">Student guide →</span>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon">📬</div>
+        <h3>Submit a Tool</h3>
+        <p>Know an AI tool that should be on AI Home? Submit it and we'll add it to the directory.</p>
+        <span class="card-link">Submit tool →</span>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section animate-on-scroll">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">What is AI Home? <span class="faq-arrow">▼</span></div>
+        <div class="faq-answer">AI Home is a curated directory of 60+ AI tools organized by category. It's completely free to browse and helps you find the right AI tool for any task — from chatbots and image generation to coding assistants and productivity apps.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Is AI Home free to use? <span class="faq-arrow">▼</span></div>
+        <div class="faq-answer">Yes! AI Home is completely free to browse. The tools listed each have their own pricing (Free, Freemium, or Paid) which is shown on every tool card. Our built-in AI chatbot is also free to use.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How does the AI chatbot work? <span class="faq-arrow">▼</span></div>
+        <div class="faq-answer">Our built-in AI chatbot is powered by Anthropic's Claude AI. It knows about all 60+ tools in our directory and can recommend the right tools for your needs, compare options, answer questions about AI, and help you get started. Your conversations are private and not stored.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Which AI chatbot is best for students? <span class="faq-arrow">▼</span></div>
+        <div class="faq-answer">For students, we recommend starting with ChatGPT (free tier), Claude (free tier), or Google Gemini (free). All three are excellent for writing essays, understanding concepts, solving problems, and doing research. DeepSeek and HuggingChat are also completely free alternatives worth trying.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What's the difference between ChatGPT and Claude? <span class="faq-arrow">▼</span></div>
+        <div class="faq-answer">ChatGPT (by OpenAI) and Claude (by Anthropic) are both excellent AI assistants. ChatGPT is known for its wide range of plugins, image generation via DALL·E, and broad knowledge. Claude excels at reading long documents, nuanced writing, coding, and following complex instructions carefully. Both are highly recommended — try both and see which feels more natural to you!</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How do I get the best results from AI tools? <span class="faq-arrow">▼</span></div>
+        <div class="faq-answer">The key is being specific in your prompts. Instead of "write an essay," try "write a 500-word essay about climate change for a high school audience, with an introduction, 3 body paragraphs, and conclusion." The more detail you give, the better the output. You can also ask AI to revise, improve, or explain its reasoning.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How can I submit a tool to be listed? <span class="faq-arrow">▼</span></div>
+        <div class="faq-answer">You can contact us via the form below or email meghanamandla05@gmail.com with the tool name, website URL, category, and a brief description. We review all submissions and add quality tools regularly.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Who built AI Home? <span class="faq-arrow">▼</span></div>
+        <div class="faq-answer">AI Home was built by Meghana Mandla, a student developer passionate about AI and technology. You can see more of her work at her portfolio (meghanamandla.github.io/my-personnal-portfolio) or connect on LinkedIn.</div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact-section animate-on-scroll">
+      <div class="contact-info">
+        <h2>Get in Touch 👋</h2>
+        <p>Have a question, suggestion, or want to submit a tool? We'd love to hear from you!</p>
+        <div class="contact-item">
+          <span class="c-icon">📧</span>
+          <div>Email · <a href="mailto:meghanamandla05@gmail.com">meghanamandla05@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">💼</span>
+          <div>LinkedIn · <a href="https://www.linkedin.com/in/meghana-mandla/" target="_blank">Meghana Mandla</a></div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">🌐</span>
+          <div>Portfolio · <a href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">meghanamandla.github.io</a></div>
+        </div>
+        <div class="contact-item">
+          <span class="c-icon">⚡</span>
+          <div>Response time · Usually within 24 hours</div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form" id="contactForm">
+          <input type="text" placeholder="Your name" id="formName" />
+          <input type="email" placeholder="Your email" id="formEmail" />
+          <select id="formType" style="background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;">
+            <option value="">Topic — select one</option>
+            <option value="general">General question</option>
+            <option value="tool">Submit a tool</option>
+            <option value="bug">Report a bug</option>
+            <option value="feedback">Feedback</option>
+            <option value="other">Other</option>
+          </select>
+          <textarea placeholder="Your message…" id="formMessage"></textarea>
+          <button type="button" onclick="submitForm()">Send Message →</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="s-icon">✅</div>
+          <h3 style="font-family:var(--font-head);color:var(--text);margin-bottom:0.5rem">Message sent!</h3>
+          <p style="color:var(--text2);font-size:14px">Thanks for reaching out. We'll get back to you soon.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:0.75rem">
+        <div class="logo-icon"><span class="logo-ai">AI</span><span class="logo-dot"></span></div>
+        <span class="logo-text">AI <strong>Home</strong></span>
+      </div>
+      <p>Your curated gateway to the world's best AI tools.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="../index.html">Home</a>
+        <a href="chatbot.html">AI Chat</a>
+        <a href="help.html">Help</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:meghanamandla05@gmail.com">Email us</a>
+        <a href="https://www.linkedin.com/in/meghana-mandla/" target="_blank">LinkedIn</a>
+        <a href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">Portfolio</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 AI Home · Built by <a href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">Meghana Mandla</a></p>
+  </div>
+</footer>
+
+<script src="../js/particles.js"></script>
+<script>
+const cursorGlow = document.getElementById('cursorGlow');
+if (cursorGlow) document.addEventListener('mousemove', e => {
+  cursorGlow.style.left = e.clientX + 'px'; cursorGlow.style.top = e.clientY + 'px';
+});
+const navbar = document.getElementById('navbar');
+if (navbar) window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 30));
+
+// FAQ
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Scroll animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.animate-on-scroll').forEach(el => obs.observe(el));
+
+// Form
+function submitForm() {
+  const name = document.getElementById('formName').value.trim();
+  const email = document.getElementById('formEmail').value.trim();
+  const msg = document.getElementById('formMessage').value.trim();
+  if (!name || !email || !msg) { alert('Please fill in all required fields.'); return; }
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+</script>
+</body>
+</html>

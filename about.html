@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About – AI Home</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👤</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/animations.css">
+<style>
+.about-page { padding-top: 64px; }
+.about-hero {
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.about-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(124,111,247,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.about-hero h1 { font-family: var(--font-head); font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 1.25rem; }
+.about-hero p { color: var(--text2); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+.about-content { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+
+.profile-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 3rem;
+}
+.profile-avatar {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #60a5fa);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+.profile-info h2 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+.profile-info .role { color: var(--accent2); font-size: 14px; font-weight: 600; margin-bottom: 1rem; }
+.profile-info p { color: var(--text2); font-size: 14px; line-height: 1.7; margin-bottom: 1.25rem; }
+.profile-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.profile-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 8px; padding: 8px 14px;
+  font-size: 13px; font-weight: 500; color: var(--text);
+  transition: all 0.2s; text-decoration: none;
+}
+.profile-link:hover { border-color: var(--accent); color: var(--accent2); }
+
+.about-section { margin-bottom: 3rem; }
+.about-section h2 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+.about-section p { color: var(--text2); font-size: 15px; line-height: 1.75; margin-bottom: 1rem; }
+
+.tech-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.75rem; margin-top: 1rem;
+}
+.tech-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  text-align: center; font-size: 13px; font-weight: 600; color: var(--text2);
+  transition: all 0.2s;
+}
+.tech-item:hover { border-color: var(--accent); color: var(--accent2); }
+.tech-item .t-icon { font-size: 22px; display: block; margin-bottom: 4px; }
+
+.mission-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  margin-top: 1.5rem;
+}
+.mission-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.5rem; text-align: center;
+}
+.mission-card .m-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.mission-card h4 { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.mission-card p { font-size: 13px; color: var(--text2); }
+
+@media (max-width: 700px) {
+  .profile-card { grid-template-columns: 1fr; text-align: center; }
+  .profile-links { justify-content: center; }
+  .mission-cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<canvas id="particleCanvas"></canvas>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <div class="logo-icon"><span class="logo-ai">AI</span><span class="logo-dot"></span></div>
+      <span class="logo-text">AI <strong>Home</strong></span>
+    </a>
+    <div class="nav-center">
+      <a href="../index.html#tools" class="nav-link">Tools</a>
+      <a href="chatbot.html" class="nav-link">AI Chat</a>
+      <a href="help.html" class="nav-link">Help</a>
+      <a href="about.html" class="nav-link" style="color:var(--accent2)">About</a>
+    </div>
+    <div class="nav-right">
+      <a href="chatbot.html" class="btn-nav">Try AI Chat ✦</a>
+    </div>
+  </div>
+</nav>
+
+<div class="about-page">
+  <div class="about-hero">
+    <h1 class="animate-fade-up delay-1">About AI Home 🏠</h1>
+    <p class="animate-fade-up delay-2">The story behind this project — built by a student, for everyone who wants to explore the world of AI.</p>
+  </div>
+
+  <div class="about-content">
+
+    <div class="profile-card animate-on-scroll">
+      <div class="profile-avatar">👩‍💻</div>
+      <div class="profile-info">
+        <h2>Meghana Mandla</h2>
+        <div class="role">Student Developer · AI Enthusiast</div>
+        <p>Hi! I'm Meghana — a student who's passionate about AI, technology, and making the web more useful. I built AI Home because I kept finding myself searching for "which AI tool is best for X?" — so I decided to build one place that answers that question for everyone.</p>
+        <p>I know Python and HTML/CSS, and this project has been a fun way to combine my love of design with my interest in AI tools. I hope AI Home helps you discover something amazing!</p>
+        <div class="profile-links">
+          <a class="profile-link" href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">🌐 Portfolio</a>
+          <a class="profile-link" href="https://www.linkedin.com/in/meghana-mandla/" target="_blank">💼 LinkedIn</a>
+          <a class="profile-link" href="mailto:meghanamandla05@gmail.com">📧 Email Me</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section animate-on-scroll">
+      <h2>🎯 The Mission</h2>
+      <p>AI tools are growing at an incredible pace — there are thousands of them now, and new ones launch every week. The problem? Most people don't know which ones exist, which are free, or which one is right for their specific need.</p>
+      <p>AI Home solves that by being a clean, fast, and organized directory — with a built-in AI chatbot that can help guide you to the right tool.</p>
+      <div class="mission-cards">
+        <div class="mission-card">
+          <div class="m-icon">🔍</div>
+          <h4>Discover</h4>
+          <p>Find AI tools you never knew existed across 8 categories.</p>
+        </div>
+        <div class="mission-card">
+          <div class="m-icon">⚖️</div>
+          <h4>Compare</h4>
+          <p>See free vs paid options with clear badges for every tool.</p>
+        </div>
+        <div class="mission-card">
+          <div class="m-icon">🚀</div>
+          <h4>Launch</h4>
+          <p>Click and go directly to any tool in one tap.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section animate-on-scroll">
+      <h2>🛠️ Built With</h2>
+      <p>AI Home is built with simple, open-web technologies — no frameworks, just clean code that anyone can read, fork, and learn from.</p>
+      <div class="tech-grid">
+        <div class="tech-item"><span class="t-icon">🌐</span>HTML5</div>
+        <div class="tech-item"><span class="t-icon">🎨</span>CSS3</div>
+        <div class="tech-item"><span class="t-icon">⚡</span>JavaScript</div>
+        <div class="tech-item"><span class="t-icon">🌿</span>Claude API</div>
+        <div class="tech-item"><span class="t-icon">🐙</span>GitHub Pages</div>
+        <div class="tech-item"><span class="t-icon">🔤</span>Google Fonts</div>
+      </div>
+    </div>
+
+    <div class="about-section animate-on-scroll">
+      <h2>📬 Say Hello</h2>
+      <p>I'd love to hear from you — whether you want to suggest a tool, report a bug, or just say hi. Reach out anytime:</p>
+      <div class="profile-links">
+        <a class="profile-link" href="mailto:meghanamandla05@gmail.com">📧 meghanamandla05@gmail.com</a>
+        <a class="profile-link" href="https://www.linkedin.com/in/meghana-mandla/" target="_blank">💼 LinkedIn</a>
+        <a class="profile-link" href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">🌐 Portfolio</a>
+        <a class="profile-link" href="help.html">🆘 Help & Support</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:0.75rem">
+        <div class="logo-icon"><span class="logo-ai">AI</span><span class="logo-dot"></span></div>
+        <span class="logo-text">AI <strong>Home</strong></span>
+      </div>
+      <p>Your curated gateway to the world's best AI tools.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="../index.html">Home</a>
+        <a href="chatbot.html">AI Chat</a>
+        <a href="help.html">Help</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:meghanamandla05@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/meghana-mandla/" target="_blank">LinkedIn</a>
+        <a href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">Portfolio</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 AI Home · Built by <a href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">Meghana Mandla</a></p>
+  </div>
+</footer>
+
+<script src="../js/particles.js"></script>
+<script>
+const cursorGlow = document.getElementById('cursorGlow');
+if (cursorGlow) document.addEventListener('mousemove', e => {
+  cursorGlow.style.left = e.clientX + 'px'; cursorGlow.style.top = e.clientY + 'px';
+});
+const navbar = document.getElementById('navbar');
+if (navbar) window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 30));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.animate-on-scroll').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
