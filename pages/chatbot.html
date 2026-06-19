@@ -613,8 +613,14 @@ console.log("Response:", data);
 
     const reply =
       data.choices?.[0]?.message?.content ||
-      'Sorry, I had trouble responding. Please try again!';
+     `Hey, sorry mate! 👋
 
+This AI chatbot is currently under development.
+
+I'm Meghana Mandla, and I'm working on improving this feature. Please explore the AI tools directory meanwhile.
+
+Thank you for visiting AI Home! 🚀`;
+   
     appendMessage('assistant', reply);
     messages.push({ role: 'assistant', content: reply });
 
@@ -622,7 +628,13 @@ console.log("Response:", data);
     removeThinking();
     appendMessage(
       'assistant',
-      '⚠️ Connection error. Please try again.'
+      `Hey, sorry mate! 👋
+
+This AI chatbot is currently under development.
+
+I'm Meghana Mandla, and I'm working on improving this feature. Please explore the AI tools directory meanwhile.
+
+Thank you for visiting AI Home! 🚀`
     );
 }
 
