@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Home – All AI Tools in One Place</title>
+<meta name="description" content="AI Home – The ultimate directory of AI tools. Chatbots, coding assistants, image generators, video, audio, productivity tools and more.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- CURSOR GLOW -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">
+        <span class="logo-ai">AI</span>
+        <span class="logo-dot"></span>
+      </div>
+      <span class="logo-text">AI <strong>Home</strong></span>
+    </a>
+    <div class="nav-center">
+      <a href="#tools" class="nav-link">Tools</a>
+      <a href="pages/chatbot.html" class="nav-link">AI Chat</a>
+      <a href="pages/help.html" class="nav-link">Help</a>
+      <a href="pages/about.html" class="nav-link">About</a>
+    </div>
+    <div class="nav-right">
+      <button class="search-toggle" id="searchToggle" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <a href="pages/chatbot.html" class="btn-nav">Try AI Chat ✦</a>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#tools">Tools</a>
+    <a href="pages/chatbot.html">AI Chat</a>
+    <a href="pages/help.html">Help & Support</a>
+    <a href="pages/about.html">About</a>
+  </div>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <input type="text" id="globalSearch" placeholder="Search 60+ AI tools…" autocomplete="off" />
+    <button class="search-close" id="searchClose">✕</button>
+  </div>
+  <div id="searchResults" class="search-results"></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="hero-content">
+    <div class="hero-badge animate-fade-up delay-1">
+      <span class="badge-dot"></span>
+      60+ AI Tools · Updated 2025
+    </div>
+    <h1 class="hero-title animate-fade-up delay-2">
+      Your Gateway to<br>
+      <span class="gradient-text" id="typedText"></span>
+    </h1>
+    <p class="hero-sub animate-fade-up delay-3">
+      Discover, compare and launch the world's best AI tools — all in one beautifully organized home.
+    </p>
+    <div class="hero-actions animate-fade-up delay-4">
+      <a href="#tools" class="btn-primary">
+        Explore Tools
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="pages/chatbot.html" class="btn-ghost">
+        Try AI Chatbot
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </a>
+    </div>
+    <!-- STATS -->
+    <div class="hero-stats animate-fade-up delay-5">
+      <div class="stat-pill"><span class="stat-num" data-target="60">0</span><span>+ Tools</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill"><span class="stat-num" data-target="6">0</span><span> Categories</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-pill"><span class="stat-num" data-target="100">0</span><span>% Free</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- FILTER + TOOLS -->
+<section class="tools-section" id="tools">
+  <div class="container">
+    <div class="section-label animate-on-scroll">All Categories</div>
+    <h2 class="section-heading animate-on-scroll">Find Your <span class="gradient-text">Perfect AI Tool</span></h2>
+
+    <!-- FILTER TABS -->
+    <div class="filter-bar animate-on-scroll">
+      <button class="filter-btn active" data-cat="all">⊕ All</button>
+      <button class="filter-btn" data-cat="chatbot">💬 Chatbots</button>
+      <button class="filter-btn" data-cat="coding">💻 Coding</button>
+      <button class="filter-btn" data-cat="image">🎨 Image</button>
+      <button class="filter-btn" data-cat="video">🎬 Video</button>
+      <button class="filter-btn" data-cat="audio">🎵 Audio</button>
+      <button class="filter-btn" data-cat="productivity">⚡ Productivity</button>
+      <button class="filter-btn" data-cat="research">🔬 Research</button>
+      <button class="filter-btn" data-cat="business">💼 Business</button>
+    </div>
+
+    <!-- TOOL SECTIONS -->
+    <div id="allToolSections">
+
+      <!-- CHATBOTS -->
+      <div class="tool-section" data-section="chatbot">
+        <div class="tool-section-header">
+          <div class="section-icon-wrap" style="--c:#7c6ff7">💬</div>
+          <div>
+            <h3>AI Chatbots & Q&A</h3>
+            <p>Conversational AI assistants for any question</p>
+          </div>
+          <span class="count-badge">10 tools</span>
+        </div>
+        <div class="tools-grid" id="grid-chatbot">
+          <a class="tool-card" href="https://chatgpt.com" target="_blank" data-cat="chatbot" data-name="ChatGPT" data-desc="Powerful conversational AI by OpenAI. Great for writing, research and coding.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🤖</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">ChatGPT</div>
+            <div class="tool-desc">Powerful conversational AI by OpenAI. Great for writing, research and coding.</div>
+            <div class="card-footer"><span class="visit-link">chatgpt.com ↗</span><span class="hot-tag">🔥 #1</span></div>
+          </a>
+          <a class="tool-card" href="https://gemini.google.com" target="_blank" data-cat="chatbot" data-name="Google Gemini" data-desc="Google's multimodal AI integrated with Workspace, Docs, and real-time search.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">✨</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Google Gemini</div>
+            <div class="tool-desc">Google's multimodal AI integrated with Workspace, Docs, and real-time search.</div>
+            <div class="card-footer"><span class="visit-link">gemini.google.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://claude.ai" target="_blank" data-cat="chatbot" data-name="Claude" data-desc="Anthropic's thoughtful AI — best for analysis, long documents, and nuanced writing.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🌿</div><span class="badge popular">Popular</span></div>
+            <div class="tool-name">Claude</div>
+            <div class="tool-desc">Anthropic's thoughtful AI — best for analysis, long documents, and nuanced writing.</div>
+            <div class="card-footer"><span class="visit-link">claude.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.perplexity.ai" target="_blank" data-cat="chatbot" data-name="Perplexity AI" data-desc="AI-powered search engine that gives cited, real-time answers from the web.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🔍</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Perplexity AI</div>
+            <div class="tool-desc">AI-powered search engine that gives cited, real-time answers from the web.</div>
+            <div class="card-footer"><span class="visit-link">perplexity.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://grok.com" target="_blank" data-cat="chatbot" data-name="Grok" data-desc="xAI's real-time AI with live X/Twitter data access and bold, direct answers.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">⚡</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Grok by xAI</div>
+            <div class="tool-desc">xAI's real-time AI with live X/Twitter data access and bold, direct answers.</div>
+            <div class="card-footer"><span class="visit-link">grok.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://deepseek.com" target="_blank" data-cat="chatbot" data-name="DeepSeek" data-desc="Open-source AI strong at math, coding, and reasoning. Completely free to use.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🐋</div><span class="badge free">Free</span></div>
+            <div class="tool-name">DeepSeek</div>
+            <div class="tool-desc">Open-source AI strong at math, coding, and reasoning. Completely free to use.</div>
+            <div class="card-footer"><span class="visit-link">deepseek.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://copilot.microsoft.com" target="_blank" data-cat="chatbot" data-name="Microsoft Copilot" data-desc="GPT-4 powered assistant built into Windows, Edge, and Microsoft Office.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🪟</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Microsoft Copilot</div>
+            <div class="tool-desc">GPT-4 powered assistant built into Windows, Edge, and Microsoft Office.</div>
+            <div class="card-footer"><span class="visit-link">copilot.microsoft.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.meta.ai" target="_blank" data-cat="chatbot" data-name="Meta AI" data-desc="Free AI assistant from Meta integrated into WhatsApp, Instagram, and Facebook.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">💙</div><span class="badge free">Free</span></div>
+            <div class="tool-name">Meta AI</div>
+            <div class="tool-desc">Free AI assistant from Meta integrated into WhatsApp, Instagram, and Facebook.</div>
+            <div class="card-footer"><span class="visit-link">meta.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://poe.com" target="_blank" data-cat="chatbot" data-name="Poe by Quora" data-desc="Access ChatGPT, Claude, Gemini and more in one single app from Quora.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎯</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Poe by Quora</div>
+            <div class="tool-desc">Access ChatGPT, Claude, Gemini and more in one single app from Quora.</div>
+            <div class="card-footer"><span class="visit-link">poe.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://huggingface.co/chat" target="_blank" data-cat="chatbot" data-name="HuggingChat" data-desc="Open-source chat using Llama, Mistral, and other open models. Fully free.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🤗</div><span class="badge free">Free</span></div>
+            <div class="tool-name">HuggingChat</div>
+            <div class="tool-desc">Open-source chat using Llama, Mistral, and other open models. Fully free.</div>
+            <div class="card-footer"><span class="visit-link">huggingface.co ↗</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- CODING -->
+      <div class="tool-section" data-section="coding">
+        <div class="tool-section-header">
+          <div class="section-icon-wrap" style="--c:#60a5fa">💻</div>
+          <div><h3>AI Coding Assistants</h3><p>Build faster with AI by your side</p></div>
+          <span class="count-badge">8 tools</span>
+        </div>
+        <div class="tools-grid" id="grid-coding">
+          <a class="tool-card" href="https://github.com/features/copilot" target="_blank" data-cat="coding" data-name="GitHub Copilot" data-desc="Real-time AI code suggestions in VS Code, JetBrains, and more editors.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🐙</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">GitHub Copilot</div>
+            <div class="tool-desc">Real-time AI code suggestions in VS Code, JetBrains, and more editors.</div>
+            <div class="card-footer"><span class="visit-link">github.com ↗</span><span class="hot-tag">🔥 Top</span></div>
+          </a>
+          <a class="tool-card" href="https://cursor.com" target="_blank" data-cat="coding" data-name="Cursor" data-desc="AI-first code editor — chat with your codebase, generate and debug with AI.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🖱️</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Cursor</div>
+            <div class="tool-desc">AI-first code editor — chat with your codebase, generate and debug with AI.</div>
+            <div class="card-footer"><span class="visit-link">cursor.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://codeium.com" target="_blank" data-cat="coding" data-name="Codeium" data-desc="Free AI coding assistant supporting 70+ languages with fast autocomplete.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🟢</div><span class="badge free">Free</span></div>
+            <div class="tool-name">Codeium</div>
+            <div class="tool-desc">Free AI coding assistant supporting 70+ languages with fast autocomplete.</div>
+            <div class="card-footer"><span class="visit-link">codeium.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://windsurf.com" target="_blank" data-cat="coding" data-name="Windsurf" data-desc="Agentic AI IDE that can plan, write, run, and iterate on code autonomously.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🏄</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Windsurf</div>
+            <div class="tool-desc">Agentic AI IDE that can plan, write, run, and iterate on code autonomously.</div>
+            <div class="card-footer"><span class="visit-link">windsurf.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://bolt.new" target="_blank" data-cat="coding" data-name="Bolt.new" data-desc="Build and deploy full-stack web apps from a text prompt — no setup needed.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">⚡</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Bolt.new</div>
+            <div class="tool-desc">Build and deploy full-stack web apps from a text prompt — no setup needed.</div>
+            <div class="card-footer"><span class="visit-link">bolt.new ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://v0.dev" target="_blank" data-cat="coding" data-name="v0 by Vercel" data-desc="Generate production-ready React UI components from natural language prompts.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">▲</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">v0 by Vercel</div>
+            <div class="tool-desc">Generate production-ready React UI components from natural language prompts.</div>
+            <div class="card-footer"><span class="visit-link">v0.dev ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://replit.com" target="_blank" data-cat="coding" data-name="Replit AI" data-desc="Browser-based AI IDE for building, running, and hosting apps instantly.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">💜</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Replit AI</div>
+            <div class="tool-desc">Browser-based AI IDE for building, running, and hosting apps instantly.</div>
+            <div class="card-footer"><span class="visit-link">replit.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://tabnine.com" target="_blank" data-cat="coding" data-name="Tabnine" data-desc="Privacy-first AI code completion that can run fully on your local machine.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🔵</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Tabnine</div>
+            <div class="tool-desc">Privacy-first AI code completion that can run fully on your local machine.</div>
+            <div class="card-footer"><span class="visit-link">tabnine.com ↗</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- IMAGE -->
+      <div class="tool-section" data-section="image">
+        <div class="tool-section-header">
+          <div class="section-icon-wrap" style="--c:#fbbf24">🎨</div>
+          <div><h3>AI Image Generation</h3><p>Turn words into stunning visuals</p></div>
+          <span class="count-badge">8 tools</span>
+        </div>
+        <div class="tools-grid">
+          <a class="tool-card" href="https://www.midjourney.com" target="_blank" data-cat="image" data-name="Midjourney" data-desc="Industry-leading AI art generator. Creates photorealistic and artistic images.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🌊</div><span class="badge paid">Paid</span></div>
+            <div class="tool-name">Midjourney</div>
+            <div class="tool-desc">Industry-leading AI art generator. Creates photorealistic and artistic images.</div>
+            <div class="card-footer"><span class="visit-link">midjourney.com ↗</span><span class="hot-tag">🔥 #1</span></div>
+          </a>
+          <a class="tool-card" href="https://openai.com/dall-e-3" target="_blank" data-cat="image" data-name="DALL·E 3" data-desc="OpenAI's image model that follows complex prompts with amazing accuracy.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎭</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">DALL·E 3</div>
+            <div class="tool-desc">OpenAI's image model that follows complex prompts with amazing accuracy.</div>
+            <div class="card-footer"><span class="visit-link">openai.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://stability.ai" target="_blank" data-cat="image" data-name="Stable Diffusion" data-desc="Open-source image model — run locally or use via hundreds of platforms.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🔥</div><span class="badge free">Free</span></div>
+            <div class="tool-name">Stable Diffusion</div>
+            <div class="tool-desc">Open-source image model — run locally or use via hundreds of platforms.</div>
+            <div class="card-footer"><span class="visit-link">stability.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://firefly.adobe.com" target="_blank" data-cat="image" data-name="Adobe Firefly" data-desc="Commercially safe AI images trained on licensed Adobe Stock content.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🦋</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Adobe Firefly</div>
+            <div class="tool-desc">Commercially safe AI images trained on licensed Adobe Stock content.</div>
+            <div class="card-footer"><span class="visit-link">firefly.adobe.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://ideogram.ai" target="_blank" data-cat="image" data-name="Ideogram AI" data-desc="Best AI for generating images with accurate, readable text inside them.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">💡</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Ideogram AI</div>
+            <div class="tool-desc">Best AI for generating images with accurate, readable text inside them.</div>
+            <div class="card-footer"><span class="visit-link">ideogram.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.canva.com/ai-image-generator/" target="_blank" data-cat="image" data-name="Canva AI" data-desc="AI image generation inside the world's most popular design platform.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎨</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Canva AI</div>
+            <div class="tool-desc">AI image generation inside the world's most popular design platform.</div>
+            <div class="card-footer"><span class="visit-link">canva.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://leonardo.ai" target="_blank" data-cat="image" data-name="Leonardo AI" data-desc="High-quality AI art with fine-tuned models for games, characters, and design.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🦁</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Leonardo AI</div>
+            <div class="tool-desc">High-quality AI art with fine-tuned models for games, characters, and design.</div>
+            <div class="card-footer"><span class="visit-link">leonardo.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.bing.com/images/create" target="_blank" data-cat="image" data-name="Bing Image Creator" data-desc="Free DALL·E 3 image generation by Microsoft — no account needed.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🔮</div><span class="badge free">Free</span></div>
+            <div class="tool-name">Bing Image Creator</div>
+            <div class="tool-desc">Free DALL·E 3 image generation by Microsoft — no account needed.</div>
+            <div class="card-footer"><span class="visit-link">bing.com ↗</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- VIDEO -->
+      <div class="tool-section" data-section="video">
+        <div class="tool-section-header">
+          <div class="section-icon-wrap" style="--c:#f87171">🎬</div>
+          <div><h3>AI Video Generation</h3><p>Create professional videos with AI</p></div>
+          <span class="count-badge">7 tools</span>
+        </div>
+        <div class="tools-grid">
+          <a class="tool-card" href="https://runwayml.com" target="_blank" data-cat="video" data-name="Runway" data-desc="Professional AI video studio used by Hollywood filmmakers and creators.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🚀</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Runway</div>
+            <div class="tool-desc">Professional AI video studio used by Hollywood filmmakers and creators.</div>
+            <div class="card-footer"><span class="visit-link">runwayml.com ↗</span><span class="hot-tag">🔥 Top</span></div>
+          </a>
+          <a class="tool-card" href="https://pika.art" target="_blank" data-cat="video" data-name="Pika" data-desc="Turn images and text into animated video clips with cinematic motion.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">⚡</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Pika</div>
+            <div class="tool-desc">Turn images and text into animated video clips with cinematic motion.</div>
+            <div class="card-footer"><span class="visit-link">pika.art ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.synthesia.io" target="_blank" data-cat="video" data-name="Synthesia" data-desc="Create AI avatar presenter videos for training and marketing in minutes.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎭</div><span class="badge paid">Paid</span></div>
+            <div class="tool-name">Synthesia</div>
+            <div class="tool-desc">Create AI avatar presenter videos for training and marketing in minutes.</div>
+            <div class="card-footer"><span class="visit-link">synthesia.io ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://sora.com" target="_blank" data-cat="video" data-name="Sora" data-desc="OpenAI's cinematic text-to-video model producing stunning, realistic clips.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🌟</div><span class="badge paid">Paid</span></div>
+            <div class="tool-name">Sora by OpenAI</div>
+            <div class="tool-desc">OpenAI's cinematic text-to-video model producing stunning, realistic clips.</div>
+            <div class="card-footer"><span class="visit-link">sora.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.heygen.com" target="_blank" data-cat="video" data-name="HeyGen" data-desc="AI avatar videos with voice cloning and multilingual auto-translation.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🗣️</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">HeyGen</div>
+            <div class="tool-desc">AI avatar videos with voice cloning and multilingual auto-translation.</div>
+            <div class="card-footer"><span class="visit-link">heygen.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://invideo.io" target="_blank" data-cat="video" data-name="InVideo AI" data-desc="Generate YouTube & social videos from text prompts in under 2 minutes.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📹</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">InVideo AI</div>
+            <div class="tool-desc">Generate YouTube & social videos from text prompts in under 2 minutes.</div>
+            <div class="card-footer"><span class="visit-link">invideo.io ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.d-id.com" target="_blank" data-cat="video" data-name="D-ID" data-desc="Animate any photo into a talking avatar video with lifelike AI lip-sync.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎪</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">D-ID</div>
+            <div class="tool-desc">Animate any photo into a talking avatar video with lifelike AI lip-sync.</div>
+            <div class="card-footer"><span class="visit-link">d-id.com ↗</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- AUDIO -->
+      <div class="tool-section" data-section="audio">
+        <div class="tool-section-header">
+          <div class="section-icon-wrap" style="--c:#34d399">🎵</div>
+          <div><h3>AI Audio & Music</h3><p>Generate music, voice, and sound with AI</p></div>
+          <span class="count-badge">7 tools</span>
+        </div>
+        <div class="tools-grid">
+          <a class="tool-card" href="https://suno.com" target="_blank" data-cat="audio" data-name="Suno" data-desc="Generate full songs with real vocals and instruments from a text prompt.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎶</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Suno</div>
+            <div class="tool-desc">Generate full songs with real vocals and instruments from a text prompt.</div>
+            <div class="card-footer"><span class="visit-link">suno.com ↗</span><span class="hot-tag">🔥 Top</span></div>
+          </a>
+          <a class="tool-card" href="https://elevenlabs.io" target="_blank" data-cat="audio" data-name="ElevenLabs" data-desc="Ultra-realistic voice cloning and text-to-speech in 30+ languages.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎙️</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">ElevenLabs</div>
+            <div class="tool-desc">Ultra-realistic voice cloning and text-to-speech in 30+ languages.</div>
+            <div class="card-footer"><span class="visit-link">elevenlabs.io ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://udio.com" target="_blank" data-cat="audio" data-name="Udio" data-desc="High-quality AI music creation — describe any genre, mood, or style.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎸</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Udio</div>
+            <div class="tool-desc">High-quality AI music creation — describe any genre, mood, or style.</div>
+            <div class="card-footer"><span class="visit-link">udio.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.descript.com" target="_blank" data-cat="audio" data-name="Descript" data-desc="Edit audio and podcasts like a text doc — AI removes filler words instantly.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📝</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Descript</div>
+            <div class="tool-desc">Edit audio and podcasts like a text doc — AI removes filler words instantly.</div>
+            <div class="card-footer"><span class="visit-link">descript.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://mubert.com" target="_blank" data-cat="audio" data-name="Mubert" data-desc="Generate royalty-free background music tracks for videos, apps, and streams.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎹</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Mubert</div>
+            <div class="tool-desc">Generate royalty-free background music tracks for videos, apps, and streams.</div>
+            <div class="card-footer"><span class="visit-link">mubert.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.otter.ai" target="_blank" data-cat="audio" data-name="Otter.ai" data-desc="AI meeting transcription — captures and organizes your meeting notes live.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🦦</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Otter.ai</div>
+            <div class="tool-desc">AI meeting transcription — captures and organizes your meeting notes live.</div>
+            <div class="card-footer"><span class="visit-link">otter.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.assemblyai.com" target="_blank" data-cat="audio" data-name="AssemblyAI" data-desc="Developer API for transcription, speaker detection, and audio intelligence.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🔊</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">AssemblyAI</div>
+            <div class="tool-desc">Developer API for transcription, speaker detection, and audio intelligence.</div>
+            <div class="card-footer"><span class="visit-link">assemblyai.com ↗</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- PRODUCTIVITY -->
+      <div class="tool-section" data-section="productivity">
+        <div class="tool-section-header">
+          <div class="section-icon-wrap" style="--c:#a78bfa">⚡</div>
+          <div><h3>AI Productivity & Writing</h3><p>Work smarter, write better, do more</p></div>
+          <span class="count-badge">8 tools</span>
+        </div>
+        <div class="tools-grid">
+          <a class="tool-card" href="https://www.notion.so/product/ai" target="_blank" data-cat="productivity" data-name="Notion AI" data-desc="AI writing, summarizing, and planning built into the Notion workspace.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📒</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Notion AI</div>
+            <div class="tool-desc">AI writing, summarizing, and planning built into the Notion workspace.</div>
+            <div class="card-footer"><span class="visit-link">notion.so ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.grammarly.com" target="_blank" data-cat="productivity" data-name="Grammarly" data-desc="AI writing assistant that corrects grammar, clarity, tone, and style.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">✅</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Grammarly</div>
+            <div class="tool-desc">AI writing assistant that corrects grammar, clarity, tone, and style.</div>
+            <div class="card-footer"><span class="visit-link">grammarly.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://gamma.app" target="_blank" data-cat="productivity" data-name="Gamma" data-desc="Generate beautiful presentations and docs from a single text prompt.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📊</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Gamma</div>
+            <div class="tool-desc">Generate beautiful presentations and docs from a single text prompt.</div>
+            <div class="card-footer"><span class="visit-link">gamma.app ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.copy.ai" target="_blank" data-cat="productivity" data-name="Copy.ai" data-desc="AI copywriting for emails, blogs, ads, and social media content at scale.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📋</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Copy.ai</div>
+            <div class="tool-desc">AI copywriting for emails, blogs, ads, and social media content at scale.</div>
+            <div class="card-footer"><span class="visit-link">copy.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.jasper.ai" target="_blank" data-cat="productivity" data-name="Jasper AI" data-desc="Enterprise AI content platform for marketing teams and brand content.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">✍️</div><span class="badge paid">Paid</span></div>
+            <div class="tool-name">Jasper AI</div>
+            <div class="tool-desc">Enterprise AI content platform for marketing teams and brand content.</div>
+            <div class="card-footer"><span class="visit-link">jasper.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://zapier.com/ai" target="_blank" data-cat="productivity" data-name="Zapier AI" data-desc="Natural language automation connecting 6000+ apps without coding.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🔗</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Zapier AI</div>
+            <div class="tool-desc">Natural language automation connecting 6000+ apps without coding.</div>
+            <div class="card-footer"><span class="visit-link">zapier.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.beautiful.ai" target="_blank" data-cat="productivity" data-name="Beautiful.ai" data-desc="AI-designed slide decks that automatically look professional and polished.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">💎</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Beautiful.ai</div>
+            <div class="tool-desc">AI-designed slide decks that automatically look professional and polished.</div>
+            <div class="card-footer"><span class="visit-link">beautiful.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.mem.ai" target="_blank" data-cat="productivity" data-name="Mem AI" data-desc="AI-powered note taking that automatically organizes and connects your ideas.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🧠</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Mem AI</div>
+            <div class="tool-desc">AI-powered note taking that automatically organizes and connects your ideas.</div>
+            <div class="card-footer"><span class="visit-link">mem.ai ↗</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- RESEARCH -->
+      <div class="tool-section" data-section="research">
+        <div class="tool-section-header">
+          <div class="section-icon-wrap" style="--c:#38bdf8">🔬</div>
+          <div><h3>AI Research & Education</h3><p>Learn faster and research smarter</p></div>
+          <span class="count-badge">6 tools</span>
+        </div>
+        <div class="tools-grid">
+          <a class="tool-card" href="https://elicit.com" target="_blank" data-cat="research" data-name="Elicit" data-desc="AI research assistant that finds and summarizes academic papers for you.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📚</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Elicit</div>
+            <div class="tool-desc">AI research assistant that finds and summarizes academic papers for you.</div>
+            <div class="card-footer"><span class="visit-link">elicit.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://consensus.app" target="_blank" data-cat="research" data-name="Consensus" data-desc="Search millions of research papers and get AI-synthesized scientific answers.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🧪</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Consensus</div>
+            <div class="tool-desc">Search millions of research papers and get AI-synthesized scientific answers.</div>
+            <div class="card-footer"><span class="visit-link">consensus.app ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.khanacademy.org/khan-labs" target="_blank" data-cat="research" data-name="Khanmigo" data-desc="AI tutor from Khan Academy that teaches any subject through Socratic dialogue.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🎓</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Khanmigo</div>
+            <div class="tool-desc">AI tutor from Khan Academy that teaches any subject through Socratic dialogue.</div>
+            <div class="card-footer"><span class="visit-link">khanacademy.org ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.wolfram.com/wolfram-one/" target="_blank" data-cat="research" data-name="Wolfram Alpha" data-desc="Computational knowledge AI — answers math, science, and data questions precisely.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🧮</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Wolfram Alpha</div>
+            <div class="tool-desc">Computational knowledge AI — answers math, science, and data questions precisely.</div>
+            <div class="card-footer"><span class="visit-link">wolfram.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://scite.ai" target="_blank" data-cat="research" data-name="Scite AI" data-desc="Shows how research papers cite each other — supporting or contradicting findings.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📖</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Scite AI</div>
+            <div class="tool-desc">Shows how research papers cite each other — supporting or contradicting findings.</div>
+            <div class="card-footer"><span class="visit-link">scite.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.chatpdf.com" target="_blank" data-cat="research" data-name="ChatPDF" data-desc="Upload any PDF and chat with it — ask questions, get summaries instantly.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📄</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">ChatPDF</div>
+            <div class="tool-desc">Upload any PDF and chat with it — ask questions, get summaries instantly.</div>
+            <div class="card-footer"><span class="visit-link">chatpdf.com ↗</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- BUSINESS -->
+      <div class="tool-section" data-section="business">
+        <div class="tool-section-header">
+          <div class="section-icon-wrap" style="--c:#fb923c">💼</div>
+          <div><h3>AI Business & Marketing</h3><p>Grow your business with AI automation</p></div>
+          <span class="count-badge">6 tools</span>
+        </div>
+        <div class="tools-grid">
+          <a class="tool-card" href="https://www.salesforce.com/artificial-intelligence/" target="_blank" data-cat="business" data-name="Salesforce Einstein" data-desc="AI-powered CRM features for sales predictions, automation, and customer insights.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">☁️</div><span class="badge paid">Paid</span></div>
+            <div class="tool-name">Salesforce Einstein</div>
+            <div class="tool-desc">AI-powered CRM features for sales predictions, automation, and customer insights.</div>
+            <div class="card-footer"><span class="visit-link">salesforce.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.hubspot.com/artificial-intelligence" target="_blank" data-cat="business" data-name="HubSpot AI" data-desc="AI marketing, sales, and customer service tools inside the HubSpot platform.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🧲</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">HubSpot AI</div>
+            <div class="tool-desc">AI marketing, sales, and customer service tools inside the HubSpot platform.</div>
+            <div class="card-footer"><span class="visit-link">hubspot.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.drift.com" target="_blank" data-cat="business" data-name="Drift" data-desc="AI chatbot for B2B websites that qualifies leads and books meetings 24/7.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">💬</div><span class="badge paid">Paid</span></div>
+            <div class="tool-name">Drift</div>
+            <div class="tool-desc">AI chatbot for B2B websites that qualifies leads and books meetings 24/7.</div>
+            <div class="card-footer"><span class="visit-link">drift.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.surfer.ai" target="_blank" data-cat="business" data-name="Surfer AI" data-desc="AI SEO writing tool that creates content optimized to rank on Google.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">🏄</div><span class="badge freemium">Freemium</span></div>
+            <div class="tool-name">Surfer AI</div>
+            <div class="tool-desc">AI SEO writing tool that creates content optimized to rank on Google.</div>
+            <div class="card-footer"><span class="visit-link">surfer.ai ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.amplemarket.com" target="_blank" data-cat="business" data-name="Amplemarket" data-desc="AI-driven sales platform for automating outreach and lead generation at scale.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">📈</div><span class="badge paid">Paid</span></div>
+            <div class="tool-name">Amplemarket</div>
+            <div class="tool-desc">AI-driven sales platform for automating outreach and lead generation at scale.</div>
+            <div class="card-footer"><span class="visit-link">amplemarket.com ↗</span></div>
+          </a>
+          <a class="tool-card" href="https://www.brandwatch.com" target="_blank" data-cat="business" data-name="Brandwatch AI" data-desc="AI social listening that monitors brand mentions and consumer trends online.">
+            <div class="card-shine"></div>
+            <div class="card-top"><div class="tool-icon">👁️</div><span class="badge paid">Paid</span></div>
+            <div class="tool-name">Brandwatch AI</div>
+            <div class="tool-desc">AI social listening that monitors brand mentions and consumer trends online.</div>
+            <div class="card-footer"><span class="visit-link">brandwatch.com ↗</span></div>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- end allToolSections -->
+
+    <div id="noResults" class="no-results hidden">
+      <div class="no-results-icon">🔍</div>
+      <h3>No tools found</h3>
+      <p>Try a different keyword or browse by category above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-orb"></div>
+    <h2>Try Our Built-in AI Chatbot</h2>
+    <p>Ask anything, explore tools, get help — powered by Claude AI, right inside AI Home.</p>
+    <a href="pages/chatbot.html" class="btn-primary btn-large">Launch AI Chat →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:0.75rem;">
+        <div class="logo-icon"><span class="logo-ai">AI</span><span class="logo-dot"></span></div>
+        <span class="logo-text">AI <strong>Home</strong></span>
+      </div>
+      <p>Your curated gateway to the world's best AI tools. Built by a student, for everyone.</p>
+      <div class="footer-social">
+        <a href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank" title="Portfolio">🌐</a>
+        <a href="https://www.linkedin.com/in/meghana-mandla/" target="_blank" title="LinkedIn">💼</a>
+        <a href="mailto:meghanamandla05@gmail.com" title="Email">📧</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="#chatbot">Chatbots</a>
+        <a href="#coding">Coding</a>
+        <a href="#image">Image</a>
+        <a href="#video">Video</a>
+        <a href="#audio">Audio</a>
+        <a href="#productivity">Productivity</a>
+      </div>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <a href="pages/chatbot.html">AI Chatbot</a>
+        <a href="pages/help.html">Help & Support</a>
+        <a href="pages/about.html">About</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:meghanamandla05@gmail.com">meghanamandla05@gmail.com</a>
+        <a href="https://www.linkedin.com/in/meghana-mandla/" target="_blank">LinkedIn</a>
+        <a href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">Portfolio</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 AI Home · Built with ❤️ by <a href="https://meghanamandla.github.io/my-personnal-portfolio/" target="_blank">Meghana Mandla</a></p>
+    <p>60+ tools · 8 categories · Always free to browse</p>
+  </div>
+</footer>
+
+<!-- FLOATING CHAT BUTTON -->
+<a href="pages/chatbot.html" class="float-chat-btn" title="Open AI Chat">
+  <span class="float-chat-icon">💬</span>
+  <span class="float-chat-pulse"></span>
+</a>
+
+<script src="js/particles.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
